@@ -30,6 +30,7 @@
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
     "autoprefixer": "^10.5.2",
+    "chromatic": "^18.0.1",
     "oxlint": "^1.71.0",
     "playwright": "^1.61.1",
     "postcss": "^8.5.19",
