@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(yes \"\")",
+      "Bash(mv .claude .claude-backup)",
+      "Bash(mv .claude-backup .claude)",
+      "Bash(mv ../temp-vite-app/* .)",
+      "Bash(mv ../temp-vite-app/.* .)",
+      "Bash(rmdir ../temp-vite-app)",
+      "Bash(npm install *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(./node_modules/.bin/tailwindcss init *)"
+    ]
+  }
+}
