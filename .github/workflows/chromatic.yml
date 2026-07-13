@@ -1,0 +1,68 @@
+# Chromatic Visual Testing Workflow
+# Runs Chromatic for visual regression testing on PRs and main branch
+
+name: Chromatic
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Cancel previous runs on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for Chromatic to detect changed components
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📚 Install dependencies
+        run: npm ci
+
+      - name: 🎨 Build Storybook
+        run: npm run build-storybook
+
+      - name: 🧪 Publish to Chromatic
+        id: chromatic
+        uses: chroma-com/chromatic-action@v1
+        with:
+          # Use CHROMATIC_PROJECT_TOKEN from repository secrets
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          # Your Chromatic project token
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Auto-accept changes for main branch
+          autoAccept: 'main'
+          # Build Storybook before publishing
+          buildCommand: npm run build-storybook
+          # Exit after uploading (don't wait for test results on PRs)
+          exitOnceUploaded: ${{ github.event_name == 'pull_request' }}
+          # Allow failing builds (useful during development)
+          allowBypass: true
+
+      - name: 📊 Post Chromatic Results
+        if: steps.chromatic.outputs.url != ''
+        run: |
+          echo "🎨 Chromatic build completed!"
+          echo "🔗 View results: ${{ steps.chromatic.outputs.url }}"
+          echo "📦 Build number: ${{ steps.chromatic.outputs.buildNumber }}"
+          echo "✅ Storybook published successfully!"
