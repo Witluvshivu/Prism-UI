@@ -50,14 +50,8 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           # Your Chromatic project token
           token: ${{ secrets.GITHUB_TOKEN }}
-          # Auto-accept changes for main branch
-          autoAccept: 'main'
-          # Build Storybook before publishing
-          buildCommand: npm run build-storybook
           # Exit after uploading (don't wait for test results on PRs)
           exitOnceUploaded: ${{ github.event_name == 'pull_request' }}
-          # Allow failing builds (useful during development)
-          allowBypass: true
 
       - name: 📊 Post Chromatic Results
         if: steps.chromatic.outputs.url != ''
