@@ -44,7 +44,7 @@ jobs:
 
       - name: 🧪 Publish to Chromatic
         id: chromatic
-        uses: chroma-com/chromatic-action@v1
+        uses: chromaui/action@latest
         with:
           # Use CHROMATIC_PROJECT_TOKEN from repository secrets
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
