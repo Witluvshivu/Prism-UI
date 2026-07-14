@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 import { Tabs, Tab, Panel } from '../../components/Tabs';
 
 const meta = {
