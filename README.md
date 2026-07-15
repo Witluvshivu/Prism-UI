@@ -1,5 +1,7 @@
 # Prism UI
 
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg?token=6a550ed75af1ff2ea8808938-nvuysimzpm)](https://6a550ed75af1ff2ea8808938-nvuysimzpm.chromatic.com/)
+
 A 20-component React design system, built end-to-end by describing components in plain English to Claude Code, and browsed live in Storybook.
 
 > Built at a React + Storybook workshop as an exercise in AI-enabled design: no manual coding, just component specs written the way a designer thinks about them (variants, states, sizes) — translated into working, typed, styled React code by AI.
